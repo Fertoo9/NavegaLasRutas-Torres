@@ -1,4 +1,5 @@
-import CartWidget from "./Cartwidget";
+import { Link } from "react-router-dom";
+import CartWidget from "./CartWidget";
 
 function Navbar() {
   return (
@@ -7,29 +8,70 @@ function Navbar() {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        backgroundColor: "#222",
+        padding: "15px 40px",
+        backgroundColor: "#111",
         color: "#fff",
-        padding: "10px 50px",
-        position: "fixed",
+        boxShadow: "0 2px 10px rgba(0,0,0,0.4)",
+        position: "sticky",
         top: 0,
-        left: 0,
-        width: "100%",
         zIndex: 1000,
-        height: "70px",
-        boxSizing: "border-box",
       }}
->
-      <h1>ZonaGaming</h1>
+    >
+      {/* Aca tenemos el Logo */}
+      <Link
+        to="/"
+        style={{
+          textDecoration: "none",
+          color: "#00ff99",
+          fontSize: "1.6rem",
+          fontWeight: "bold",
+          letterSpacing: "1px",
+          marginRight: "60px", 
+        }}
+      >
+        ZonaGaming
+      </Link>
 
-      <ul style={{ display: "flex", listStyle: "none", gap: "100px" }}>
-        <li><a href="#" style={{ color: "#fff", textDecoration: "none" }}>Teclados</a></li>
-        <li><a href="#" style={{ color: "#fff", textDecoration: "none" }}>Mouse</a></li>
-        <li><a href="#" style={{ color: "#fff", textDecoration: "none" }}>Auriculares</a></li>
-        <li><a href="#" style={{ color: "#fff", textDecoration: "none" }}>Pads</a></li>
-      </ul>
+      {/* Aca tenemos las Categorías */}
+      <div
+        style={{
+          display: "flex",
+          gap: "35px",
+          alignItems: "center",
+          flexWrap: "wrap",
+        }}
+      >
+        <NavLink to="/category/laptops">Laptops</NavLink>
+        <NavLink to="/category/smartphones">Smartphones</NavLink>
+        <NavLink to="/category/mens-watches">Accesorios</NavLink>
+        <NavLink to="/category/lighting">Iluminación RGB</NavLink>
+        <NavLink to="/category/furniture">Setup Gamer</NavLink>
+        <NavLink to="/category/home-decoration">Decoración</NavLink>
+      </div>
 
-      <CartWidget />
+      {/* Aca tenemos el Carrito */}
+      <div style={{ marginLeft: "40px" }}> 
+        <CartWidget />
+      </div>
     </nav>
+  );
+}
+
+function NavLink({ to, children }) {
+  return (
+    <Link
+      to={to}
+      style={{
+        textDecoration: "none",
+        color: "#fff",
+        fontWeight: "500",
+        transition: "color 0.3s ease",
+      }}
+      onMouseEnter={(e) => (e.target.style.color = "#00ff99")}
+      onMouseLeave={(e) => (e.target.style.color = "#fff")}
+    >
+      {children}
+    </Link>
   );
 }
 
